@@ -164,6 +164,7 @@
                                             <th scope="col">Heure de départ
                                             </th>
                                             <th scope="col">Durée</th>
+                                            <th scope="col">Action</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -186,6 +187,9 @@
                                             <td>
                                                 <%= vol.getDuree() %>
                                                 heures
+                                            </td>
+                                            <td>
+                                                <a class="btn btn-primary" href="reservervol?idvol=<%= vol.getId() %>">Réserver</a>
                                             </td>
                                         </tr>
                                         <% } %>
