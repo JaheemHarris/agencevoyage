@@ -7,8 +7,6 @@ package mg.agence.voyage.model;
 
 import java.util.Date;
 import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
@@ -16,23 +14,15 @@ import javax.persistence.TemporalType;
  *
  * @author ihari
  */
-@Entity
-@Table(name = "reservation")
-public class Reservation extends BaseModel{
-    
-    @Column(name = "id_vol")
+public class ReservationTemplate {
     private int idVol;
-    
     private String token;
-    
-    @Temporal(TemporalType.DATE)
-    @Column(name = "date_reservation")
-    private Date dateReservation;
+    private String dateReservation;
 
-    public Reservation() {
+    public ReservationTemplate() {
     }
 
-    public Reservation(int idVol, String token, Date dateReservation) {
+    public ReservationTemplate(int idVol, String token, String dateReservation) {
         this.idVol = idVol;
         this.token = token;
         this.dateReservation = dateReservation;
@@ -54,11 +44,11 @@ public class Reservation extends BaseModel{
         this.token = token;
     }
 
-    public Date getDateReservation() {
+    public String getDateReservation() {
         return dateReservation;
     }
 
-    public void setDateReservation(Date dateReservation) {
+    public void setDateReservation(String dateReservation) {
         this.dateReservation = dateReservation;
     }
 }

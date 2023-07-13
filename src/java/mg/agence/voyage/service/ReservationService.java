@@ -5,6 +5,7 @@
  */
 package mg.agence.voyage.service;
 
+import java.util.UUID;
 import mg.agence.voyage.dao.HibernateDAO;
 import mg.agence.voyage.model.Reservation;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,10 +24,16 @@ public class ReservationService {
     public Reservation saveReservation(Reservation reservation) throws Exception{
         Reservation savedReservation = null;
         try{
+            reservation.setToken(this.generateToken());
             savedReservation = (Reservation) this.hibernateDAO.save(reservation);
         }catch(Exception e){
             throw e;
         }
         return savedReservation;
+    }
+    
+    public String generateToken() {
+        UUID uuid = UUID.randomUUID();
+        return uuid.toString().replace("-", "");
     }
 }

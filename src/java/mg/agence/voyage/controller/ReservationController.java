@@ -5,6 +5,7 @@
  */
 package mg.agence.voyage.controller;
 
+import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import mg.agence.voyage.model.Reservation;
@@ -32,10 +33,11 @@ public class ReservationController {
         try {
             Reservation reservation = new Reservation();
             reservation.setIdVol(idVol);
+            reservation.setDateReservation(new Date());
             savedReservation = this.reservationService.saveReservation(reservation);
         } catch (Exception ex) {
             Logger.getLogger(ReservationController.class.getName()).log(Level.SEVERE, null, ex);
         }
-        return savedReservation;
+        return "redirect:/searchVol";
     }
 }

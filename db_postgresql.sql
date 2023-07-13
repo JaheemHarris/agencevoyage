@@ -24,6 +24,7 @@ CREATE TABLE reservation(
     id SERIAL PRIMARY KEY,
     id_vol INT NOT NULL,
     token VARCHAR(255),
+    nombre_place INT,
     date_reservation TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     FOREIGN KEY (id_vol) REFERENCES vol(id)
 );
