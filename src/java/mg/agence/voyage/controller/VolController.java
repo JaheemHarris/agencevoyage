@@ -12,6 +12,7 @@ import java.util.logging.Logger;
 import mg.agence.voyage.model.Avion;
 import mg.agence.voyage.model.DetailsVol;
 import mg.agence.voyage.model.Vol;
+import mg.agence.voyage.model.EtatVol;
 import mg.agence.voyage.model.VolTemplate;
 import mg.agence.voyage.service.AvionService;
 import mg.agence.voyage.service.VolService;
@@ -80,5 +81,17 @@ public class VolController {
             throw e;
         }
         return "recherche-vol";
+    }
+    
+    @RequestMapping(value={"listevol"},method=RequestMethod.GET)
+    public String availableVol(Model model) throws Exception{
+        try{
+            List<EtatVol> vols = new ArrayList<EtatVol>();
+            vols = this.volService.getEtatVols();
+            model.addAttribute("vols", vols);
+        }catch(Exception e){
+            throw e;
+        }
+        return "liste-vol";
     }
 }

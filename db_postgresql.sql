@@ -59,4 +59,23 @@ LIMIT 1;
 
 SELECT * FROM view_details_vol WHERE date_depart >= '2023-07-15' ORDER BY date_depart, heure_depart LIMIT 1;
 
+ALTER TABLE reservation ADD COLUMN nombre_place INT DEFAULT 1;
 
+CREATE OR REPLACE VIEW view_place_prix AS
+SELECT 
+    id_vol,
+    SUM(nombre_place) AS total_place_prix
+FROM reservation WHERE token IS NOT NULL GROUP BY id_vol;
+
+
+CREATE OR REPLACE VIEW view_etat_vol AS
+SELECT
+    vdv.*,
+    COALESCE(total_place_prix, 0) AS total_place_reserver,
+    ((vdv.nombre_siege_affaire + vdv.nombre_siege_eco) - COALESCE(total_place_prix, 0))  AS nombre_place_disponible
+FROM view_details_vol vdv
+LEFT JOIN view_place_prix vpp
+ON vdv.id = vpp.id_vol;
+
+
+1081

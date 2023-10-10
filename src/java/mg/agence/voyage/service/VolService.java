@@ -12,6 +12,7 @@ import java.time.format.DateTimeFormatter;
 import java.util.List;
 import mg.agence.voyage.dao.HibernateDAO;
 import mg.agence.voyage.model.DetailsVol;
+import mg.agence.voyage.model.EtatVol;
 import mg.agence.voyage.model.Vol;
 import mg.agence.voyage.model.VolTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -42,6 +43,16 @@ public class VolService {
             throw e;
         }
         return savedVol;
+    }
+    
+    public List<EtatVol> getEtatVols() throws Exception{
+        List<EtatVol> result = null;
+        try{
+            result = this.hibernateDAO.find(new EtatVol());
+        }catch(Exception e){
+            throw e;
+        }
+        return result;
     }
     
     public List<DetailsVol> rechercheVol(String date) throws Exception{

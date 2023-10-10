@@ -1,9 +1,10 @@
 <%-- Document : test Created on : May 24, 2022, 12:56:45 PM Author : jaheem --%>
+<%@page import="mg.agence.voyage.model.EtatVol"%>
 <%@page import="mg.agence.voyage.model.DetailsVol"%>
 <%@page import="java.text.DecimalFormat"%>
 <%@page import="java.util.List" %>
 <% 
-    List<DetailsVol> vols = (List<DetailsVol>) request.getAttribute("vols");
+    List<EtatVol> vols = (List<EtatVol>) request.getAttribute("vols");
 %>
 <%@page contentType="text/html" pageEncoding="UTF-8" %>
 <!DOCTYPE html>
@@ -139,11 +140,16 @@
                                             <th scope="col">Date de départ</th>
                                             <th scope="col">Heure de départ</th>
                                             <th scope="col">Durée</th>
+                                            <th scope="col">Nombre Place réservé</th>
+                                            <th scope="col">Nombre Place Disponible</th>
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <%for (DetailsVol vol : vols) {%>
+                                        <%for (EtatVol vol : vols) {%>
                                         <tr>
+                                            <td>
+                                                Vol <%= vol.getId() %>
+                                            </td>
                                             <td>
                                                 <%= vol.getModele() %>
                                             </td>
@@ -161,6 +167,12 @@
                                             <td>
                                                 <%= vol.getDuree() %>
                                                 heures
+                                            </td>
+                                            <td>
+                                                <%= vol.getTotalPlaceReserver()%>
+                                            </td>
+                                            <td>
+                                                <%= vol.getNombrePlaceDisponible()%>
                                             </td>
                                         </tr>
                                         <% } %>
